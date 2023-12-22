@@ -1,0 +1,69 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+import string
+
+
+#
+# Complete the 'authEvents' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts 2D_STRING_ARRAY events as parameter.
+#
+
+def f(x):
+    return ord(x)
+
+def h(s):
+    sum = 0
+    n = len(s)
+    for index in range(len(s)):
+        sum += f(s[index]) * pow(131, n - 1)
+        n = n - 1
+    return sum % (pow(10, 9) + 7)
+
+def checkStr(str, password, word):
+    if int(str) == password:
+        return 1
+    
+    for letter in string.ascii_letters:
+        
+
+def authEvents(events):
+    # Write your code here
+    answers = []
+    word = ''
+    password = 0
+    
+    for event in events:
+        if event[0] == 'setPassword':
+            password = h(event[1])
+            word = event[1]
+        else:
+            answers.append(checkStr(event[1], password, word))
+             
+    
+    return answers
+    
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    events_rows = int(input().strip())
+    events_columns = int(input().strip())
+
+    events = []
+
+    for _ in range(events_rows):
+        events.append(input().rstrip().split())
+
+    result = authEvents(events)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
