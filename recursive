@@ -1,0 +1,57 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+#
+# Complete the 'maxElement' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER maxSum
+#  3. INTEGER k
+#
+
+sum = 0
+
+def maxElement(n, maxSum, k):
+    global sum
+    
+    # increase function
+    def increase(index, sum):
+        if sum < maxSum:
+            if (index - 1) in range(len(arr)) and (arr[index] - arr[index - 1] > 0):
+                increase(index - 1, sum)
+            elif (index + 1) in range(len(arr)) and (arr[index] - arr[index + 1] > 0):
+                increase(index + 1, sum)
+            else:
+                sum = sum + 1
+                arr[index] = arr[index] + 1
+                print(arr)
+                increase(k, sum)
+    
+    # Write your code here
+    arr = [0] * n
+    increase(k, sum)
+    return arr[k]
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    maxSum = int(input().strip())
+
+    k = int(input().strip())
+
+    result = maxElement(n, maxSum, k)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
